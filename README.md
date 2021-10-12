@@ -1,4 +1,4 @@
-# Title of Project
+# DupDetector
 
 CS350, Old Dominion Univ., Fall 2021
 

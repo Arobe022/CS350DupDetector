@@ -1,19 +1,29 @@
 package edu.odu.cs.cs350;
 import java.util.List;
 public class Token {
-	protected String token;
+	protected int line;
+	protected int column;
+	protected String lex;
 	List<Token>tokenList;
 	public Token ()
 	{
-		token="";
+		
+		line=0;
+		column=0;
+		lex="";
+		
 	}
-	public Token(String s)
+	public Token(String s,int col, int l)
 	{
-		token=s;
+		
+		lex=s;
+		column=col;
+		line=l;
+		
 	}
-	public Token getTokens() {
-		Token t= new Token("if");
-		return t;
+	public String getLexemes() {
+		return lex;
+		
 	}
 
 }

@@ -12,7 +12,8 @@ public class Token {
 		token=s;
 	}
 	public Token getTokens() {
-		return this;
+		Token t= new Token("if");
+		return t;
 	}
 
 }

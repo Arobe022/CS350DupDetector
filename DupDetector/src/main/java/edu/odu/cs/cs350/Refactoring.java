@@ -9,6 +9,10 @@ public class Refactoring {
 	void ReportPart1()
 	{
 		List<CPPSourceFiles>allSources=CPPSourceFiles.getSourceFiles();
+		for(int i=0; i<allSources.size(); i++)
+		{
+			//System.out.print()
+		}
 		
 	}
 

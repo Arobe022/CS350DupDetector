@@ -1,13 +1,27 @@
 package edu.odu.cs.cs350;
 import java.util.*;
 public class CPPSourceFiles {
-	protected static List<CPPSourceFiles>src;
+	protected static List<String>src;
+	protected static String path;
+	public CPPSourceFiles ()
+	{
+		src=null;
+		path ="";
+	}
+	public CPPSourceFiles(String p1,List<String>source)
+	{	
+		path=p1;
+		src=source;
+		
+	}
 	public String getPath()
 	{
-		return "/home/zeil/projects/cppProject1/src/foo.cpp";
+		path="/home/zeil/projects/cppProject1/src/foo.cpp";
+		return path;
 	}
 	List<Token> getTokens()
 	{
+		//int ind=in;
 		List<Token> results= new ArrayList<>();
 		results.add(new Token("if",1,1));
 		results.add(new Token("<",1,2));
@@ -15,9 +29,13 @@ public class CPPSourceFiles {
 		
 		return results;
 	}
-	public static List getSourceFiles()
-	{
-		return src;
+	public List<CPPSourceFiles> getSourceFiles()
+	{ 
+		path="/home/zeil/projects/cppProject1/src/foo.cpp";
+		src.add(path);
+		List<CPPSourceFiles> resultsSrc= new ArrayList<>();
+		resultsSrc.add(new CPPSourceFiles(path,src));
+		return resultsSrc;
 		
 	}
 }

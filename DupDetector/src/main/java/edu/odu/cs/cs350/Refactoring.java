@@ -16,7 +16,6 @@ public class Refactoring {
 		
 		}
 		System.out.print(System.lineSeparator());
-		
 	}
 	
 	/*static void reportPart0()

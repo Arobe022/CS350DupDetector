@@ -1,6 +1,15 @@
 plugins {
    id 'java'
 }
+jar {  
+	//baseName="Refactoring"
+    manifest {  
+        attributes(  
+   
+                'Main-Class': 'edu.odu.cs.cs350.Refactoring'
+                )
+    }  
+}  
 
 java {
     sourceCompatibility = JavaVersion.toVersion(11)

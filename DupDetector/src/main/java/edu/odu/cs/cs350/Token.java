@@ -5,6 +5,7 @@ public class Token {
 	protected int column;
 	protected String lex;
 	List<Token>tokenList;
+	
 	public Token ()
 	{
 		

@@ -2,7 +2,7 @@ package edu.odu.cs.cs350;
 import java.util.*;
 import java.io.*;
 public class Refactoring {
-
+	//displays path and amount of tokens
 	static void ReportPart1(CPPSourceFiles Cpp)
 	{
 		List<CPPSourceFiles>allSources=Cpp.getSourceFiles();
@@ -18,20 +18,12 @@ public class Refactoring {
 		System.out.print(System.lineSeparator());
 	}
 	
-	/*static void reportPart0()
-	{
-		System.out.print("Opportunity ");
-		System.out.print(SequenceOfTokens.getOpportunity());
-		System.out.print(", ");
-		System.out.print(SequenceOfTokens.getSequenceSize());
-		System.out.print(" tokens");
-	}*/
+
 
 
 public static void main(String[] argv) throws FileNotFoundException
 {
 	CPPSourceFiles K = new CPPSourceFiles();
-	//reportPart0();
 	ReportPart1(K);
 }
 }

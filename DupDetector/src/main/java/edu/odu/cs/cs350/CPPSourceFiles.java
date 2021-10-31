@@ -4,11 +4,13 @@ public class CPPSourceFiles {
 	protected static List<String>src;
 	protected static List<Token>tokenList;
 	protected static String path;
+	//default constructor
 	public CPPSourceFiles ()
 	{
 		src=null;
 		path ="";
 	}
+	//realsies constructor
 	public CPPSourceFiles(String p1,List<String>source,List<Token>t)
 	{	
 		path=p1;
@@ -16,11 +18,13 @@ public class CPPSourceFiles {
 		tokenList=t;
 		
 	}
+	//get the path of the files
 	public String getPath()
 	{
 		path="/home/zeil/projects/cppProject1/src/foo.cpp";
 		return path;
 	}
+	//get the tokens and store them in a list
 	List<Token> getTokens()
 	{
 		//int ind=in;
@@ -31,6 +35,7 @@ public class CPPSourceFiles {
 		
 		return tokenList;
 	}
+	//get the list containing source files and tokens
 	public List<CPPSourceFiles> getSourceFiles()
 	{ 
 		String p="/home/zeil/projects/cppProject1/src/foo.cpp";

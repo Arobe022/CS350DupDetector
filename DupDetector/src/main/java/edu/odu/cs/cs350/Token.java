@@ -5,7 +5,7 @@ public class Token {
 	protected int column;
 	protected String lex;
 	List<Token>tokenList;
-	
+	//default token constructor
 	public Token ()
 	{
 		
@@ -14,6 +14,7 @@ public class Token {
 		lex="";
 		
 	}
+	//token constructor takes string, column and line #
 	public Token(String s,int col, int l)
 	{
 		
@@ -22,6 +23,7 @@ public class Token {
 		line=l;
 		
 	}
+	//get the lexemes
 	public String getLexemes() {
 		return lex;
 		

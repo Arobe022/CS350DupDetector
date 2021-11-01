@@ -69,7 +69,9 @@ public static void main(String[] argv) throws FileNotFoundException
 	SequenceOfTokens T = new SequenceOfTokens(); //stubs in here, i need them, also shouldn't the SequenceOfTokens class contain a list of tokens instead of 
 													//token having a list of tokens?
 	//reportPart0();
-	ReportPart1(K, T);
+	ReportPart1(K);
+	
+	ReportPart2(K, T);
 	
 }
 }

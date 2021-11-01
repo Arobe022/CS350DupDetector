@@ -27,4 +27,12 @@ public class Token {
 		
 	}
 
+	public int getLine() {	//gets the token's line, I need this - bryan
+		return line;
+		
+	}
+	
+	public int getColumn() {	//gets the token's collumn, i also need this -bryan
+		return column;
+	}
 }

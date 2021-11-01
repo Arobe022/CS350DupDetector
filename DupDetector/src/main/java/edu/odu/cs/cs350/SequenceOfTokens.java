@@ -5,16 +5,17 @@ import java.util.*;
 public class SequenceOfTokens {
 	private static int sequenceSize;
 	private static int opportunity;
+	//private static String refactoredToken;
 	static List<String>sequenceOfLexemes;
-
+	
 	//get opportunity value
-	static int getOpportunity()
+	int getOpportunity()
 	{
 		opportunity=2;
 		return opportunity;
 	}
 	//get the size of the sequence
-	public static int getSequenceSize()
+	public int getSequenceSize()
 	{
 		sequenceSize=3;
 		return sequenceSize;

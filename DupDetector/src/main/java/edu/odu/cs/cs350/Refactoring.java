@@ -5,6 +5,7 @@ public class Refactoring {
 
 	static void ReportPart1(CPPSourceFiles Cpp)
 	{
+		//part one of report
 		List<CPPSourceFiles>allSources=Cpp.getSourceFiles();
 		System.out.print("Files Scanned:");
 		System.out.print(System.lineSeparator());
@@ -47,13 +48,13 @@ public class Refactoring {
 		System.out.print(removeMe.getColumn());	//print column#
 		System.out.print(System.lineSeparator()); //endline
 		
-		List<String> Lexmemes = new ArrayList<>(SequenceOfTokens.getSequenceOfLexemes());	//i shouldn't have to do this but the stubs have sequence of tokens
+		List<Token> Lexmemes = new ArrayList<>(SequenceOfTokens.getSequenceOfLexemes());	//i shouldn't have to do this but the stubs have sequence of tokens
 																				//stored as a list in itself instead of containing a list of the tokens that could have their lexemes acceded through them
 																				//-bryan
 		//print the list
 		for (int i=0; i < Lexmemes.size(); i++)
 		{
-			System.out.print(Lexmemes.get(i));
+			System.out.print(SequenceOfTokens.getSequenceOfLexemes().get(i).getLexemes());
 			System.out.print(" ");
 		}
 		System.out.print(System.lineSeparator()); //endline

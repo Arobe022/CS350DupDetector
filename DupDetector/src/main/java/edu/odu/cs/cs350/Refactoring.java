@@ -35,11 +35,11 @@ public class Refactoring {
 			System.out.print(allSources.get(i).getTokens().size());
 		
 		}
-		for(int i=0; i<Cpp.allFiles.size();i++)
+	/*	for(int i=0; i<Cpp.allFiles.size();i++)
 		{
 			System.out.print(Cpp.allFiles.get(i).getAbsolutePath());
 		}
-		System.out.print(System.lineSeparator());
+		System.out.print(System.lineSeparator());*/
 	}
 	
 
@@ -87,34 +87,57 @@ public class Refactoring {
 	}
 
 
- 
+	 public static void listFiles(CPPSourceFiles k, String startingDir)
+	 {
+		 //this section of code is modified from a recursive file retrieval https://stackabuse.com/java-list-files-in-a-directory/
+		 File dire = new File(startingDir);
+		 File[] files = dire.listFiles();
+		 if(files != null && files.length >0)
+		 {
+			 for (File file: files)
+			 {
+				 if(file.isDirectory())
+				 {
+					 listFiles(k,file.getAbsolutePath());
+					k.allFiles.add(file);
+				 }
+				
+				 {
+					 k.allFiles.add(file);
+				 }
+			 }
+		 }
+	 }
+
 
 public static void main(String[] args) throws FileNotFoundException
-{
+{//Empty List for strings
 	List<String>Source=new ArrayList<>();
+	//number of suggestions... how many suggestions they want
 	int numSuggestions = Integer.parseInt(args[0]);
 	for(int i=1; i<args.length; i++) {
-	File inputFile = new File(args[1]);
-	String inputString= args[1];
-	Source.add(inputString);
+		//grab the file, mainly so if someone else needs it they can use it.
+		File inputFile = new File(args[i]);
+		String inputString= args[i];
+		Source.add(inputString);
+	//make a list of files
+		List<File>fileList=new ArrayList<>();
+		fileList.add(inputFile);
+		//list of tokens, this is stub
+		List<Token>tokens=new ArrayList<>();
+		tokens.add(new Token("else",1,1));
+		tokens.add(new Token("<",1,2));
+		tokens.add(new Token("=",1,2));
+		//make a cppSourceFile
+		CPPSourceFiles K = new CPPSourceFiles(inputString,Source,tokens,fileList);
+		listFiles(K,inputString);
 	
-	List<File>fileList=new ArrayList<>();
-	fileList.add(inputFile);
-	List<Token>tokens=new ArrayList<>();
-	tokens.add(new Token("else",1,1));
-	tokens.add(new Token("<",1,2));
-	tokens.add(new Token("=",1,2));
-	CPPSourceFiles K = new CPPSourceFiles(inputString,Source,tokens,fileList);
-	//K.listFiles(inputString);
 	
-	//CPPSourceFiles K = new CPPSourceFiles();
 	
-	SequenceOfTokens T = new SequenceOfTokens(); //stubs in here, i need them, also shouldn't the SequenceOfTokens class contain a list of tokens instead of 
-													//token having a list of tokens?
-	//reportPart0();
+		SequenceOfTokens T = new SequenceOfTokens(); //stubs in here, i need them, also shouldn't the SequenceOfTokens class contain a list of tokens instead of 												//token having a list of tokens?
 	
-	ReportPart1(K);
-	ReportPart2(K, T);
+		ReportPart1(K);
+		ReportPart2(K, T);
 	}
 }
 	}

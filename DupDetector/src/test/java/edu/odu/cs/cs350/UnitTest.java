@@ -62,6 +62,30 @@ class UnitTest {
 		
 	}
 
+
+	@Test
+	void testAddFile() 
+	{
+		String p="/home/cs_arobe022/CS350";
+		File f=new File(p);
+		List<File>files=new ArrayList<>();
+		files.add(f);
+		List<String>Source=new ArrayList<>();
+		Source.add(p);
+		List<Token>tokens=new ArrayList<>();
+		tokens.add(null);
+		tokens.add(new Token("else",1,1));
+		tokens.add(new Token("<",1,2));
+		tokens.add(new Token("=",1,2));
+		CPPSourceFiles c3= new CPPSourceFiles(p,Source,tokens,files);
+		Refactoring.listFiles(c3, p);
+		for(int i=0;i<c3.allFiles.size();i++)
+		{
+			assertEquals(c3.allFiles.get(i).getAbsolutePath(),files.get(i).getAbsolutePath());
+		}
+	
+	}
+
 }
  
  

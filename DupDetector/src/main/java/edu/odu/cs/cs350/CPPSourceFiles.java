@@ -9,7 +9,7 @@ import java.nio.file.Paths;
 public class CPPSourceFiles {
 	protected static List<String>src;
 	protected static File directory;
-	protected static List<File> allFiles;
+	protected List<File> allFiles;
 	protected static List<Token>tokenList;
 	protected static String path;
 	//default constructor
@@ -69,25 +69,5 @@ public class CPPSourceFiles {
 		return resultsSrc;
 		
 	}
-	 public void listFiles(String startingDir)
-	 {
-		 //this section of code is modified from a recursive file retrieval https://stackabuse.com/java-list-files-in-a-directory/
-		 File dire = new File(startingDir);
-		 File[] files = dire.listFiles();
-		 if(files != null && files.length >0)
-		 {
-			 for (File file: files)
-			 {
-				 if(file.isDirectory())
-				 {
-					 listFiles(file.getAbsolutePath());
-					allFiles.add(file);
-				 }
-				 else
-				 {
-					 allFiles.add(file);
-				 }
-			 }
-		 }
-	 }
-}
+		}
+

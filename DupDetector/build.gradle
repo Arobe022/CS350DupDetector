@@ -1,5 +1,8 @@
 plugins {
    id 'java'
+   id 'project-report'
+   id "org.xbib.gradle.plugin.git" version "2.0.0"
+   
 }
 jar {  
 	//baseName="Refactoring"
@@ -31,3 +34,49 @@ test {
     useJUnitPlatform()
 }
 
+task clonePages() {
+    doLast {
+        mkdir 'build/dup-pages'
+        def thisRepo = "/home/cs_arobe022/CS350/CS350DupDetector"
+        System.out.println(thisRepo);
+        def pagesDir = "$buildDir/dup-pages"
+        project.delete {
+            delete pagesDir
+        }
+        def grgit = git.clone {
+        	remote='git@github.com:Arobe022/CS350DupDetector.git'
+            dir = pagesDir
+            uri = 'file:' + thisRepo
+            bare = false
+            refToCheckout = 'dup-pages'
+        }
+        grgit.checkout {
+            branch = 'dup-pages'
+        }
+    }
+}
+task reports(dependsOn:['test','javadoc']){
+	description 'Generates Reports and Docs'
+}
+
+task copyReports (type: Copy, dependsOn: ['reports', 'clonePages']) {  
+    from "$buildDir/reports"
+    into "$buildDir/dup-pages"
+}
+
+task updateGHPages (dependsOn: 'copyReports') {
+    group = "Reporting"
+    description  'Copies reports to the gh-pages branch in preparation for a future push to GitHub'
+    doLast {
+        def pagesDir = "$buildDir/dup-pages"
+        def grgit = git.open {
+            dir = pagesDir + "/.git"
+        }
+        grgit.add (update: false, patterns: ['reports/'])
+        grgit.add (update: true, patterns: ['reports/'])
+        grgit.commit {
+            message = "Updating web pages"
+        }
+        grgit.push {}
+    }
+}

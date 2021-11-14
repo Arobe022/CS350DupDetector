@@ -40,15 +40,16 @@ task clonePages() {
         def thisRepo = "/home/cs_arobe022/CS350/CS350DupDetector"
         System.out.println(thisRepo);
         def pagesDir = "$buildDir/dup-pages"
-        project.delete {
-            delete pagesDir
-        }
+
         def grgit = git.clone {
         	remote='git@github.com:Arobe022/CS350DupDetector.git'
             dir = pagesDir
             uri = 'file:' + thisRepo
             bare = false
             refToCheckout = 'dup-pages'
+        }
+        project.delete {
+            delete pagesDir
         }
         grgit.checkout {
             branch = 'dup-pages'

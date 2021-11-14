@@ -61,7 +61,25 @@ class UnitTest {
 		assertEquals(c2.getTokens(),tokens);
 		
 	}
-
+	//I made a set path function so I have to test it
+    @Test 
+    void testSetPath()
+    {
+    	String p="/home/zeil/projects/cppProject1/src/foo.cpp";
+		File f=new File(p);
+		List<File>files=new ArrayList<>();
+		files.add(f);
+		List<String>Source=new ArrayList<>();
+		Source.add(p);
+		List<Token>tokens=new ArrayList<>();
+		tokens.add(null);
+		tokens.add(new Token("else",1,1));
+		tokens.add(new Token("<",1,2));
+		tokens.add(new Token("=",1,2));
+		CPPSourceFiles c2= new CPPSourceFiles(p,Source,tokens,files);
+		c2.setPath("/home/cs_arobe022/CS350");
+		assertEquals(c2.getPath(),"/home/cs_arobe022/CS350");
+    }
 
 	@Test
 	void testAddFile() 

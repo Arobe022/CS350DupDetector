@@ -1,7 +1,26 @@
 package edu.odu.cs.cs350;
 import java.util.*;
 import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+
+ 
 public class Refactoring {
+	int nSuggestions;
+	static class Node {    
+	    File data; 
+	        Node left, right; 
+	          
+	        Node(File data){ 
+	            this.data = data; 
+	            left = null; 
+	            right = null; 
+	        }}
+
+//static List<File>allFiles;
+		
+	
+
 
 	static void ReportPart1(CPPSourceFiles Cpp)
 	{
@@ -15,6 +34,10 @@ public class Refactoring {
 			System.out.print(", ");
 			System.out.print(allSources.get(i).getTokens().size());
 		
+		}
+		for(int i=0; i<Cpp.allFiles.size();i++)
+		{
+			System.out.print(Cpp.allFiles.get(i).getAbsolutePath());
 		}
 		System.out.print(System.lineSeparator());
 	}
@@ -63,9 +86,28 @@ public class Refactoring {
 		//}	//end brackat for big loop
 	}
 
-public static void main(String[] argv) throws FileNotFoundException
+
+ 
+
+public static void main(String[] args) throws FileNotFoundException
 {
-	CPPSourceFiles K = new CPPSourceFiles();
+	List<String>Source=new ArrayList<>();
+	int numSuggestions = Integer.parseInt(args[0]);
+	for(int i=1; i<args.length; i++) {
+	File inputFile = new File(args[1]);
+	String inputString= args[1];
+	Source.add(inputString);
+	
+	List<File>fileList=new ArrayList<>();
+	fileList.add(inputFile);
+	List<Token>tokens=new ArrayList<>();
+	tokens.add(new Token("else",1,1));
+	tokens.add(new Token("<",1,2));
+	tokens.add(new Token("=",1,2));
+	CPPSourceFiles K = new CPPSourceFiles(inputString,Source,tokens,fileList);
+	//K.listFiles(inputString);
+	
+	//CPPSourceFiles K = new CPPSourceFiles();
 	
 	SequenceOfTokens T = new SequenceOfTokens(); //stubs in here, i need them, also shouldn't the SequenceOfTokens class contain a list of tokens instead of 
 													//token having a list of tokens?
@@ -73,6 +115,7 @@ public static void main(String[] argv) throws FileNotFoundException
 	
 	ReportPart1(K);
 	ReportPart2(K, T);
+	}
+}
+	}
 	
-}
-}

@@ -5,6 +5,7 @@ import java.util.*;
 public class SequenceOfTokens {
 	private static int sequenceSize;
 	private static int opportunity;
+	int nSuggestions;
 	//private static String refactoredToken;
 	static List<Token>sequenceOfLexemes;
 	public SequenceOfTokens()

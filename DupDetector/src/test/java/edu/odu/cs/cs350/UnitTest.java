@@ -7,7 +7,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.jupiter.api.Test;
-
+import java.nio.file.Files;
+import java.util.*;
+import java.util.Scanner;
+import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 class UnitTest {
 
 	@Test
@@ -40,6 +45,9 @@ class UnitTest {
 	void CPPSourceFileConstructor()
 	{
 		String p="/home/zeil/projects/cppProject1/src/foo.cpp";
+		File f=new File(p);
+		List<File>files=new ArrayList<>();
+		files.add(f);
 		List<String>Source=new ArrayList<>();
 		Source.add(p);
 		List<Token>tokens=new ArrayList<>();
@@ -47,7 +55,7 @@ class UnitTest {
 		tokens.add(new Token("else",1,1));
 		tokens.add(new Token("<",1,2));
 		tokens.add(new Token("=",1,2));
-		CPPSourceFiles c2= new CPPSourceFiles(p,Source,tokens);
+		CPPSourceFiles c2= new CPPSourceFiles(p,Source,tokens,files);
 		assertEquals(c2.getPath(),p);
 		assertEquals(c2.getSourceFiles(),Source);
 		assertEquals(c2.getTokens(),tokens);

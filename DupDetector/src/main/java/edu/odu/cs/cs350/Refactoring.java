@@ -99,7 +99,7 @@ public class Refactoring {
 				 if(file.isDirectory())
 				 {
 					 listFiles(k,file.getAbsolutePath());
-					k.allFiles.add(file);
+					//k.allFiles.add(file);
 				 }
 				
 				 {
@@ -108,36 +108,83 @@ public class Refactoring {
 			 }
 		 }
 	 }
-
+	 
+	 //this function checks if a file is a .h, .cpp, or a directory
+	 //-bryan
+	 public static char fileType(String S) {
+		String thing = S;
+		char type = 'd';	//defaults to assuming directory
+		//System.out.print (thing);
+		
+		//for scaling	(i will replace this with something better if I can figure out how 2 string wildcards in java)
+		int Lenhead = thing.length() - 1;	//checking if final character is h
+		int Lencpp = thing.length()-3;		//checking if .cpp
+		//loop
+		for(int i = 0; i<thing.length(); i++) {
+			if (thing.charAt(i) == '.')	//when the '.' is found, its time to check the file extention
+			{
+				i++;	//increment to after the '.'
+				type = 'x';//preliminary 'assume it isn't a .cpp/.h'
+				if (thing.charAt(i) == 'h' && i == Lenhead)
+					return 'h';	//save a bracket and just return h instead because header
+				else if (thing.charAt(i) == 'c' && i == Lencpp)	//check if .cpp file
+				{
+					i++;
+					if (thing.charAt(i) == 'p') {	
+						i++;
+						if (thing.charAt(i) == 'p') {
+							type = 'c';
+							return type;	//return c if .cpp
+						}
+					}
+						
+				}
+				else
+					return type;	//returns type, which is 'x' if being done here, because its an error.
+				
+			}
+		}
+		 return type;	//returning type
+	 }
 
 public static void main(String[] args) throws FileNotFoundException
 {//Empty List for strings
 	List<String>Source=new ArrayList<>();
 	//number of suggestions... how many suggestions they want
 	int numSuggestions = Integer.parseInt(args[0]);
+	char type;	//can be 'c' (.cpp), 'h' (.h), 'd' (directory), or 'x' (invalid)
+	
 	for(int i=1; i<args.length; i++) {
 		//grab the file, mainly so if someone else needs it they can use it.
 		File inputFile = new File(args[i]);
 		String inputString= args[i];
+		
+		
+		type = fileType(inputString);	//get the type of this file, can be used for checking if it is a directory
+		
+		if (type != 'x') {	//if it is not a directory/.cpp/.h, don't add it in.
 		Source.add(inputString);
+		
 	//make a list of files
 		List<File>fileList=new ArrayList<>();
 		fileList.add(inputFile);
+		
 		//list of tokens, this is stub
 		List<Token>tokens=new ArrayList<>();
 		tokens.add(new Token("else",1,1));
 		tokens.add(new Token("<",1,2));
 		tokens.add(new Token("=",1,2));
+		
 		//make a cppSourceFile
 		CPPSourceFiles K = new CPPSourceFiles(inputString,Source,tokens,fileList);
 		listFiles(K,inputString);
-	
 	
 	
 		SequenceOfTokens T = new SequenceOfTokens(); //stubs in here, i need them, also shouldn't the SequenceOfTokens class contain a list of tokens instead of 												//token having a list of tokens?
 	
 		ReportPart1(K);
 		ReportPart2(K, T);
+		}
 	}
 }
 	}

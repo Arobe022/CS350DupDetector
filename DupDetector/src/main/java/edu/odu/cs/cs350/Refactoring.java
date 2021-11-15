@@ -7,6 +7,7 @@ import java.nio.file.Paths;
  
 public class Refactoring {
 	int nSuggestions;
+	//attempt at tree may come back to it
 	static class Node {    
 	    File data; 
 	        Node left, right; 
@@ -35,11 +36,11 @@ public class Refactoring {
 			System.out.print(allSources.get(i).getTokens().size());
 		
 		}
-	/*	for(int i=0; i<Cpp.allFiles.size();i++)
+		/*for(int i=0; i<Cpp.allFiles.size();i++)
 		{
 			System.out.print(Cpp.allFiles.get(i).getAbsolutePath());
-		}
-		System.out.print(System.lineSeparator());*/
+		}*/
+		System.out.print(System.lineSeparator());
 	}
 	
 

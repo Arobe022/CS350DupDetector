@@ -80,7 +80,7 @@ class UnitTest {
 		c2.setPath("/home/cs_arobe022/CS350");
 		assertEquals(c2.getPath(),"/home/cs_arobe022/CS350");
     }
-
+//make sure files are added properly
 	@Test
 	void testAddFile() 
 	{

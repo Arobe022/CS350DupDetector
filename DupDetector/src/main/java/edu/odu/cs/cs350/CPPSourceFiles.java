@@ -32,6 +32,7 @@ public class CPPSourceFiles {
 		allFiles=f;
 		
 	}
+	//set the path
 	public String setPath(String p1)
 	{
 		return path=p1;

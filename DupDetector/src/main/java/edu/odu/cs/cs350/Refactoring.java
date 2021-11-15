@@ -7,6 +7,7 @@ import java.nio.file.Paths;
  
 public class Refactoring {
 	int nSuggestions;
+	//attempt at tree may come back to it
 	static class Node {    
 	    File data; 
 	        Node left, right; 

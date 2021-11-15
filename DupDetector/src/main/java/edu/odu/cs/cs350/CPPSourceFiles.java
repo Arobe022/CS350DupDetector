@@ -7,8 +7,10 @@ import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 public class CPPSourceFiles {
+	//list of c++ source files
 	protected static List<String>src;
 	protected static File directory;
+	//list of all files
 	protected List<File> allFiles;
 	protected static List<Token>tokenList;
 	protected static String path;

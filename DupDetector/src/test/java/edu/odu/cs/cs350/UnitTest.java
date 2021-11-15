@@ -80,7 +80,7 @@ class UnitTest {
 		c2.setPath("/home/cs_arobe022/CS350");
 		assertEquals(c2.getPath(),"/home/cs_arobe022/CS350");
     }
-//make sure files are added properly
+
 	@Test
 	void testAddFile() 
 	{
@@ -102,6 +102,26 @@ class UnitTest {
 			assertEquals(c3.allFiles.get(i).getAbsolutePath(),files.get(i).getAbsolutePath());
 		}
 	
+	}
+	
+	@Test
+	void testfileType()	//testing the file type checker
+	{
+		String c = "/home/yes.cpp";
+		String h = "/home/yes.h";
+		String d = "/home";
+		String x = "/home.x";
+		
+		char cpptest = Refactoring.fileType(c);
+		char htest = Refactoring.fileType(h);
+		char dirtest = Refactoring.fileType(d);
+		char errortest = Refactoring.fileType(x);
+		
+		assertEquals(cpptest, 'c');
+		assertEquals(htest, 'h');
+		assertEquals(dirtest, 'd');
+		assertEquals(errortest, 'x');
+		
 	}
 
 }

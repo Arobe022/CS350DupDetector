@@ -34,50 +34,70 @@ test {
     useJUnitPlatform()
 }
 
+task reports (dependsOn: ['javadoc', 'test']) {
+    description 'Generate all reports for this project'
+}
+
+
+
 task clonePages() {
     doLast {
         mkdir 'build/dup-pages'
-        def thisRepo = "/home/cs_arobe022/CS350/CS350DupDetector"
-        System.out.println(thisRepo);
+        def thisRepo = "$buildDir/../.."
         def pagesDir = "$buildDir/dup-pages"
+            project.delete {
+            delete pagesDir
+        }
 
-        def grgit = git.clone {
-        	remote='git@github.com:Arobe022/CS350DupDetector.git'
+         def grgit = git.clone {
             dir = pagesDir
-            uri = 'file:' + thisRepo
+            uri = thisRepo
             bare = false
             refToCheckout = 'dup-pages'
-        }
-        project.delete {
-            delete pagesDir
+            
         }
         grgit.checkout {
             branch = 'dup-pages'
         }
+        grgit.close()
+
     }
 }
-task reports(dependsOn:['test','javadoc']){
-	description 'Generates Reports and Docs'
+
+task copyReport(dependsOn: ['reports','clonePages']) {  
+   doLast {
+
+
+	ant.copy(  todir: "${buildDir}/dup-pages"){
+		   fileset(dir: "${buildDir}/docs")}
+         ant.copy( todir: "${buildDir}/dup-pages"){
+         	   fileset(dir: "${buildDir}/reports")}
+		     
+
+                 }
 }
 
-task copyReports (type: Copy, dependsOn: ['reports', 'clonePages']) {  
-    from "$buildDir/reports"
-    into "$buildDir/dup-pages"
-}
-
-task updateGHPages (dependsOn: 'copyReports') {
+task deployReports (dependsOn:'copyReport') {
     group = "Reporting"
-    description  'Copies reports to the gh-pages branch in preparation for a future push to GitHub'
+    description  'Copies reports to the dup-pages branch in preparation for a future push to GitHub'
     doLast {
         def pagesDir = "$buildDir/dup-pages"
         def grgit = git.open {
             dir = pagesDir + "/.git"
+            
         }
-        grgit.add (update: false, patterns: ['reports/'])
-        grgit.add (update: true, patterns: ['reports/'])
+        grgit.add (update: false, patterns: ['javadoc/'])
+        grgit.add (update: true, patterns: ['javadoc/'])
+         grgit.add (update: false, patterns: ['tests/'])
+        grgit.add (update: true, patterns: ['tests/'])
         grgit.commit {
             message = "Updating web pages"
         }
         grgit.push {}
+        exec {
+            workingDir = '.'
+            commandLine = ['git', 'push','--all']
+        }
+        grgit.close()
     }
 }

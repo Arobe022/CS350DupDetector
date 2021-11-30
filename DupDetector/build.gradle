@@ -33,7 +33,7 @@ test {
     ignoreFailures = true
     useJUnitPlatform()
 }
-
+//for the sake of academic honesty this is from my gitlab website code-AR
 task reports (dependsOn: ['javadoc', 'test']) {
     description 'Generate all reports for this project'
 }

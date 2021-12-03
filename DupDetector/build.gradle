@@ -2,6 +2,7 @@ plugins {
    id 'java'
    id 'project-report'
    id "org.xbib.gradle.plugin.git" version "2.0.0"
+   id "org.xbib.gradle.plugin.jflex" version "1.5.0"
    
 }
 jar {  
@@ -21,9 +22,26 @@ java {
 
 repositories {
     jcenter()
+    ivy{
+    	url 'https://www.cs.odu.edu/~zeil/ivyrepo'
+    	}
 }
 
+sourceSets {
+  main {
+     jflex {
+       srcDir "src/main/jflex"
+     }
+     java {
+       srcDir "$buildDir/my-generated-sources/jflex"
+     }
+  }
+}
+
+
+
 dependencies {
+	implementation 'net.sf.saxon:saxon-dom:8.7+'
     testImplementation 'org.junit.jupiter:junit-jupiter:5.7.0'
     testImplementation 'org.hamcrest:hamcrest-library:2.2'
     

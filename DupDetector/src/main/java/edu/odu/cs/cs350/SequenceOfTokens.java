@@ -1,8 +1,10 @@
 package edu.odu.cs.cs350;
 
+import java.io.Reader;
 import java.util.*;
+import java.io.IOException;
 
-public class SequenceOfTokens {
+public class SequenceOfTokens implements Iterable<Token>{
 	private static int sequenceSize;
 	private static int opportunity;
 	int nSuggestions;
@@ -19,12 +21,27 @@ public class SequenceOfTokens {
 		sequenceOfLexemes=temp;
 	}
 	
+	public SequenceOfTokens(final Reader input) {
+        sequenceOfLexemes = new LinkedList<Token>();
+        GeneratedScanner scanner = new GeneratedScanner (input);
+        try {
+            Token token = scanner.yylex();
+            while (token != null && token.getKind() != TokenKinds.EOF) {
+                sequenceOfLexemes.add (token);
+                token = scanner.yylex();
+            }
+        } catch (IOException ex) {
+            // Not necessarily a problem, depending on the input source
+        }
+    }
 	//get opportunity value
 	int getOpportunity()
 	{
 		opportunity=2;
 		return opportunity;
 	}
+
+
 	//get the size of the sequence
 	public int getSequenceSize()
 	{
@@ -40,5 +57,10 @@ public class SequenceOfTokens {
 		return sequenceOfLexemes;
 		
 	}
+	 @Override
+	    public final Iterator<Token> iterator() {
+	        return sequenceOfLexemes.iterator();
+	    }
+
 	
 }

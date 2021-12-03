@@ -3,7 +3,7 @@ import java.util.*;
 import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-
+import java.util.Scanner;
  
 public class Refactoring {
 	int nSuggestions;
@@ -159,7 +159,12 @@ public static void main(String[] args) throws FileNotFoundException
 		//grab the file, mainly so if someone else needs it they can use it.
 		File inputFile = new File(args[i]);
 		String inputString= args[i];
-		
+		  Scanner in = new Scanner(new File(inputString));
+		    while (in.hasNext()) {
+		        String s = in.next();
+		        
+		        
+		    }
 		
 		type = fileType(inputString);	//get the type of this file, can be used for checking if it is a directory
 		

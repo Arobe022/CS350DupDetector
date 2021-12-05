@@ -3,8 +3,14 @@ plugins {
    id 'project-report'
    id "org.xbib.gradle.plugin.git" version "2.0.0"
    id "org.xbib.gradle.plugin.jflex" version "1.5.0"
+  //id 'pmd' // and/or checkstyle, jacoco, spotbugs
+ // id 'checkstyle'
+  //id 'jacoco'
+   id 'edu.odu.cs.report_accumulator' version '1.4' 
+   
    
 }
+
 jar {  
 	//baseName="Refactoring"
     manifest {  
@@ -55,8 +61,25 @@ test {
 task reports (dependsOn: ['javadoc', 'test']) {
     description 'Generate all reports for this project'
 }
+/*checkstyle {
+        configFile = new File(rootDir, "config/checkstyle.xml")
+        ignoreFailures = true
+        sourceSets = [sourceSets.main]
+   }
 
 
+   pmd {
+        ruleSets = ["basic", "braces", "design"]
+        ignoreFailures = true
+        sourceSets = [sourceSets.main]
+   }
+reportStats {
+    reportsURL = 'https://arobe022.github.io/CS350DupDetector/javadoc'
+    htmlSourceDir = file('src/main/html')  // default value
+    reportsDir = file('build/reports') // default value
+                 // defaults to current date, but can be any run identifier
+}*/
+ 
 
 task clonePages() {
     doLast {

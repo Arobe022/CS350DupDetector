@@ -36,10 +36,11 @@ public class Refactoring {
 			System.out.print(allSources.get(i).getTokens().size());
 		
 		}
-		/*for(int i=0; i<Cpp.allFiles.size();i++)
+		for(int i=0; i<Cpp.allFiles.size();i++)
 		{
 			System.out.print(Cpp.allFiles.get(i).getAbsolutePath());
-		}*/
+			System.out.print(System.lineSeparator());
+		}
 		System.out.print(System.lineSeparator());
 	}
 	
@@ -102,10 +103,11 @@ public class Refactoring {
 					 listFiles(k,file.getAbsolutePath());
 					//k.allFiles.add(file);
 				 }
-				
-				 {
+				 else
 					 k.allFiles.add(file);
-				 }
+					//listFiles(k,file.getAbsolutePath());
+					 
+				 
 			 }
 		 }
 	 }
@@ -159,12 +161,9 @@ public static void main(String[] args) throws FileNotFoundException
 		//grab the file, mainly so if someone else needs it they can use it.
 		File inputFile = new File(args[i]);
 		String inputString= args[i];
-		  Scanner in = new Scanner(new File(inputString));
-		    while (in.hasNext()) {
-		        String s = in.next();
 		        
 		        
-		    }
+		    
 		
 		type = fileType(inputString);	//get the type of this file, can be used for checking if it is a directory
 		
@@ -173,7 +172,7 @@ public static void main(String[] args) throws FileNotFoundException
 		
 	//make a list of files
 		List<File>fileList=new ArrayList<>();
-		fileList.add(inputFile);
+		
 		
 		//list of tokens, this is stub
 		List<Token>tokens=new ArrayList<>();
@@ -186,12 +185,21 @@ public static void main(String[] args) throws FileNotFoundException
 		listFiles(K,inputString);
 	
 	
-		SequenceOfTokens T = new SequenceOfTokens(); //stubs in here, i need them, also shouldn't the SequenceOfTokens class contain a list of tokens instead of 												//token having a list of tokens?
-	
+		 //stubs in here, i need them, also shouldn't the SequenceOfTokens class contain a list of tokens instead of 												//token having a list of tokens?
+		for(int j=0; j<K.allFiles.size();j++) {
+			
+		FileReader fileReader = new FileReader(K.allFiles.get(j));
+		SequenceOfTokens T = new SequenceOfTokens(fileReader);
 		ReportPart1(K);
 		ReportPart2(K, T);
 		}
 	}
+
 }
-	}
+}
+	
+}
+	  
+
+	
 	

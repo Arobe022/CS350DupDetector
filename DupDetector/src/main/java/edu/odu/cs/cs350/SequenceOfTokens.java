@@ -2,6 +2,7 @@ package edu.odu.cs.cs350;
 
 import java.io.Reader;
 import java.util.*;
+import java.io.FileReader;
 import java.io.IOException;
 
 public class SequenceOfTokens implements Iterable<Token>{
@@ -21,7 +22,7 @@ public class SequenceOfTokens implements Iterable<Token>{
 		sequenceOfLexemes=temp;
 	}
 	
-	public SequenceOfTokens(final Reader input) {
+	public SequenceOfTokens(final FileReader input) {
         sequenceOfLexemes = new LinkedList<Token>();
         GeneratedScanner scanner = new GeneratedScanner (input);
         try {

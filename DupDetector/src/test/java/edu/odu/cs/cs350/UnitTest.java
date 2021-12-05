@@ -123,6 +123,24 @@ class UnitTest {
 		assertEquals(errortest, 'x');
 		
 	}
+	@Test
+	void TestTokenization() throws IOException
+	{
+    	String p="/home/cs_arobe022/CS361/list_polyfact/term.cpp";
+		File f=new File(p);
+		File f2=new File(p);
+		FileReader fileReader = new FileReader(f);
+		SequenceOfTokens T = new SequenceOfTokens(fileReader);
+		fileReader.close();
+		FileReader fileReader2 = new FileReader(f2);
+		SequenceOfTokens T2 = new SequenceOfTokens(fileReader2);
+		fileReader.close();
+		for(int i=0; i<T.sequenceOfLexemes.size();i++) {
+			assertEquals(T.sequenceOfLexemes.get(i).lex,T2.sequenceOfLexemes.get(i).lex);
+			assertEquals(T.sequenceOfLexemes.get(i).line,T2.sequenceOfLexemes.get(i).line);
+			assertEquals(T.sequenceOfLexemes.get(i).column, T.sequenceOfLexemes.get(i).column);
+		}
+	}
 
 }
  

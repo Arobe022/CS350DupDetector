@@ -150,7 +150,7 @@ public class Refactoring {
 		 return type;	//returning type
 	 }
 
-public static void main(String[] args) throws FileNotFoundException
+public static void main(String[] args) throws IOException
 {//Empty List for strings
 	List<String>Source=new ArrayList<>();
 	//number of suggestions... how many suggestions they want
@@ -190,8 +190,10 @@ public static void main(String[] args) throws FileNotFoundException
 			
 		FileReader fileReader = new FileReader(K.allFiles.get(j));
 		SequenceOfTokens T = new SequenceOfTokens(fileReader);
+		fileReader.close();
 		ReportPart1(K);
 		ReportPart2(K, T);
+			
 		}
 	}
 

@@ -31,7 +31,7 @@ import static edu.odu.cs.cs350.TokenKinds.*;
     return new Token(type, yyline+1, yycolumn+1);
   }
 
-  private Token symbol(TokenKinds type, String value) {
+    private Token symbol(TokenKinds type, String value) {
     return new Token(type, yyline+1, yycolumn+1, value);
   }
   
@@ -171,7 +171,7 @@ SingleCharacter = [^\r\n\'\\]
   ";"                            { return symbol(TokenKinds.SEMICOLON); }
   ","                            { return symbol(TokenKinds.COMMA); }
   "."                            { return symbol(TokenKinds.DOT); }
-  "'"							{return symbol(TokenKinds.TICK);}
+ 
   
   /* operators */
   "="                            { return symbol(TokenKinds.EQ); }
@@ -212,6 +212,8 @@ SingleCharacter = [^\r\n\'\\]
   ">>="                          { return symbol(TokenKinds.RSHIFTEQ); }
   ">>>="                         { return symbol(TokenKinds.URSHIFTEQ); }
   "#" 							 { return symbol(TokenKinds.HASH);}
+
+ 
 }
 
 

@@ -10,6 +10,7 @@
 
 
 package edu.odu.cs.cs350;
+import static edu.odu.cs.cs350.TokenKinds.*;
 //@SuppressWarnings("unused")
 
 %%

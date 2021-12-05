@@ -73,12 +73,12 @@ task reports (dependsOn: ['javadoc', 'test']) {
         ignoreFailures = true
         sourceSets = [sourceSets.main]
    }*/
-reportStats {
+/*reportStats {
     reportsURL = 'https://arobe022.github.io/CS350DupDetector/javadoc'
     htmlSourceDir = file('src/main/html')  // default value
     reportsDir = file('build/reports') // default value
                  // defaults to current date, but can be any run identifier
-}
+}*/
  
 
 task clonePages() {

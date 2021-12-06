@@ -34,7 +34,7 @@ import static edu.odu.cs.cs350.TokenKinds.*;
     private Token symbol(TokenKinds type, String value) {
     return new Token(type, yyline+1, yycolumn+1, value);
   }
-  
+
  private long parseLong(int start, int end, int radix) {
     long result = 0;
     long digit;
@@ -212,8 +212,48 @@ SingleCharacter = [^\r\n\'\\]
   ">>="                          { return symbol(TokenKinds.RSHIFTEQ); }
   ">>>="                         { return symbol(TokenKinds.URSHIFTEQ); }
   "#" 							 { return symbol(TokenKinds.HASH);}
+  "'"							{return symbol(TokenKinds.APOS);}
+  "`"							{return symbol(TokenKinds.TICK);}
+ "\\"							{return symbol(TokenKinds.DIVIDE);}
+  "@"							{return symbol(TokenKinds.AT);}
 
+
+/* string literal */
+  \"                             { yybegin(STRING); string.setLength(0); }
+
+  /* character literal */
+  \'                             { yybegin(CHARLITERAL); }
+  
+  /* comments */
+  {Comment}                      { /* ignore */ }
+
+  /* whitespace */
+  {WhiteSpace}                   { /* ignore */ }
+
+  /* identifiers */ 
+  {Identifier}                   { return symbol(IDENTIFIER, yytext()); } 
+  } 
+<STRING> {
+  \"                             { yybegin(YYINITIAL); return symbol(TokenKinds.STRING_LITERAL, string.toString()); }
+  
+  {StringCharacter}+             { string.append( yytext() ); }
+  
+  /* escape sequences */
  
+  "\\b"                          { string.append( '\b' ); }
+  "\\t"                          { string.append( '\t' ); }
+  "\\n"                          { string.append( '\n' ); }
+  "\\f"                          { string.append( '\f' ); }
+  "\\r"                          { string.append( '\r' ); }
+  "\\\""                         { string.append( '\"' ); }
+  "\\'"                          { string.append( '\'' ); }
+  "\\\\"                         { string.append( '\\' ); }
+  \\[0-3]?{OctDigit}?{OctDigit}  { char val = (char) Integer.parseInt(yytext().substring(1),8);
+                        				   string.append( val ); }
+  
+  /* error cases */
+  \\.                            { throw new RuntimeException("Illegal escape sequence \""+yytext()+"\""); }
+  {LineTerminator}               { throw new RuntimeException("Unterminated string at end of line"); }
 }
 
 

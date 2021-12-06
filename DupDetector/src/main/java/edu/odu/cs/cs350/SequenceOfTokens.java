@@ -46,8 +46,7 @@ public class SequenceOfTokens implements Iterable<Token>{
 	//get the size of the sequence
 	public int getSequenceSize()
 	{
-		sequenceSize=6;
-		return sequenceSize;
+		return sequenceOfLexemes.size();
 	}
 	//get the sequence
 	public static List<Token> getSequenceOfLexemes()

@@ -36,11 +36,11 @@ public class Refactoring {
 			System.out.print(allSources.get(i).getTokens().size());
 		
 		}
-		for(int i=0; i<Cpp.allFiles.size();i++)
+		/*for(int i=0; i<Cpp.allFiles.size();i++)
 		{
 			System.out.print(Cpp.allFiles.get(i).getAbsolutePath());
 			System.out.print(System.lineSeparator());
-		}
+		}*/
 		System.out.print(System.lineSeparator());
 	}
 	

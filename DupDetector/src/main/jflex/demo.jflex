@@ -34,7 +34,6 @@ import static edu.odu.cs.cs350.TokenKinds.*;
     private Token symbol(TokenKinds type, String value) {
     return new Token(type, yyline+1, yycolumn+1, value);
   }
-
  private long parseLong(int start, int end, int radix) {
     long result = 0;
     long digit;
@@ -239,7 +238,6 @@ SingleCharacter = [^\r\n\'\\]
   {StringCharacter}+             { string.append( yytext() ); }
   
   /* escape sequences */
- 
   "\\b"                          { string.append( '\b' ); }
   "\\t"                          { string.append( '\t' ); }
   "\\n"                          { string.append( '\n' ); }
@@ -255,8 +253,6 @@ SingleCharacter = [^\r\n\'\\]
   \\.                            { throw new RuntimeException("Illegal escape sequence \""+yytext()+"\""); }
   {LineTerminator}               { throw new RuntimeException("Unterminated string at end of line"); }
 }
-
-
   
 /* error fallback */
 [^]                              { throw new RuntimeException("Illegal character \""+yytext()+
